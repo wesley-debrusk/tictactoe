@@ -7,50 +7,82 @@ public class Main {
 	public static void main(String[] args) {
 
 		int mode;
-		String[][] tutorial = { { "1", "2", "3" }, { "4", "5", "6" }, { "7", "8", "9" } };
 		Scanner kbd = new Scanner(System.in);
+		Board board = new Board();
 
 		System.out.println("Welcome to tic-tac-toe! Board positions are as follows: ");
-		printTutorial();
+		board.printTutorial();
 		System.out.print("Enter 1 to play singleplay or 2 to play multiplayer: ");
 		mode = kbd.nextInt();
 
 		switch (mode) {
 		case 1:
-			runSinglePlayer(kbd);
+			runSinglePlayer(board, kbd);
 		case 2:
+			runMultiplayer(board, kbd);
 
 		}
 
+		kbd.close();
+
 	}
 
-	public static void runSinglePlayer(Scanner kbd) {
+	public static void runSinglePlayer(Board board, Scanner kbd) {
 
-		Board board = new Board();
+		int move;
+
 		board.printBoard();
 
 		while (true) {
 
 			System.out.print("Enter your move: ");
-			int move = kbd.nextInt();
+			move = kbd.nextInt();
 			board.makeMove(move, 1);
 			board.printBoard();
 		}
 
 	}
 
-	public static void printTutorial() {
-		System.out.println("     |     |     ");
-		System.out.println("  1  |  2  |  3  ");
-		System.out.println("_____|_____|_____");
-		System.out.println("     |     |     ");
-		System.out.println("  4  |  5  |  6  ");
-		System.out.println("_____|_____|_____");
-		System.out.println("     |     |     ");
-		System.out.println("  7  |  8  |  9  ");
-		System.out.println("     |     |     ");
-	}
+	public static void runMultiplayer(Board board, Scanner kbd) {
+		int move;
+		board.printBoard();
 
-	
+		while (true) {
+			System.out.print("Player 1 enter your move: ");
+			move = kbd.nextInt();
+			if (board.isMoveValid(move)) {
+				board.makeMove(move, 1);
+			} else {
+				while (true) {
+					System.out.print("Move not valid, enter another move: ");
+					move = kbd.nextInt();
+					if (board.isMoveValid(move)) {
+						board.makeMove(move, 1);
+						break;
+					}
+				}
+			}
+
+			board.printBoard();
+
+			System.out.print("Player 2 enter your move: ");
+			move = kbd.nextInt();
+			if (board.isMoveValid(move)) {
+				board.makeMove(move, 2);
+			} else {
+				while (true) {
+					System.out.print("Move not valid, enter another move: ");
+					move = kbd.nextInt();
+					if (board.isMoveValid(move)) {
+						board.makeMove(move, 2);
+						break;
+					}
+				}
+			}
+			board.printBoard();
+
+		}
+
+	}
 
 }
