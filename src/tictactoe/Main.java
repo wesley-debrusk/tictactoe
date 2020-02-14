@@ -13,7 +13,7 @@ public class Main {
 
 			System.out.println("Welcome to tic-tac-toe! Board positions are as follows: ");
 			board.printTutorial();
-			System.out.print("Enter 1 to play singleplay or 2 to play multiplayer: ");
+			System.out.print("Enter 1 to play singleplayer or 2 to play multiplayer: ");
 			mode = kbd.nextInt();
 
 			switch (mode) {
@@ -29,6 +29,7 @@ public class Main {
 			System.out.print("Enter 1 to play again, or anything else to quit: ");
 			keepPlaying = kbd.nextInt();
 			if (keepPlaying == 1) {
+				clearScreen();
 				continue;
 			} else {
 				break;
@@ -81,6 +82,7 @@ public class Main {
 						}
 					}
 				}
+				clearScreen();
 				board.printBoard();
 			} else {
 				return;
@@ -89,6 +91,7 @@ public class Main {
 			if (continueGame(board)) {
 				move = board.findBestMove();
 				board.makeMove(move, 2);
+				clearScreen();
 				board.printBoard();
 			} else {
 				return;
@@ -99,6 +102,7 @@ public class Main {
 
 	public static void runMultiplayer(Board board, Scanner kbd) {
 		int move;
+		clearScreen();
 		board.printBoard();
 
 		while (true) {
@@ -118,11 +122,13 @@ public class Main {
 						}
 					}
 				}
+				clearScreen();
 				board.printBoard();
 			} else {
 				return;
 			}
 			if (continueGame(board)) {
+				clearScreen();
 				board.printBoard();
 
 				System.out.print("Player 2 enter your move: ");
@@ -139,6 +145,7 @@ public class Main {
 						}
 					}
 				}
+				clearScreen();
 				board.printBoard();
 			} else {
 				return;
